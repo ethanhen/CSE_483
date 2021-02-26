@@ -49,7 +49,22 @@ namespace MyIntegerSet
         public IntegerSet(bool[] val)
             : this()
         {
-			//TODO Write this constructor
+            Console.Write("\n IntegerSet Constructed with bool[]");
+            _set = new bool[val.Length];
+            int count = 0;
+            foreach(bool x in val)
+            {
+                if (x)
+                {
+                    _set[count] = true;
+                }
+                else
+                {
+                    _set[count] = false;
+                }
+
+                count++;
+            }
         }
 
 
@@ -58,13 +73,40 @@ namespace MyIntegerSet
         /// </summary>
         /// <param name="otherSet">The other IntegerSet object.</param>
         /// <returns>The resultant set which contains the union of the two sets.</returns>
-        public IntegerSet Union(IntegerSet otherSet)
+        public IntegerSet Union(IntegerSet otherSet)//logical or
         {
-			// TODO Write the Union Method
-			// Must use foreach
-			// Must use exception handling
-			
-			return new IntegerSet();
+            // TODO Write the Union Method
+            // Must use foreach
+            // Must use exception handling
+
+            IntegerSet result = new IntegerSet();
+            int count = 0;
+
+            try
+            {
+                foreach (bool value in otherSet.Set)
+                {
+                    result.InsertElement(count);
+                    count++;
+                }
+
+                count = 0;
+                foreach (bool value in _set)
+                {
+                    result.InsertElement(count);
+                    count++;
+                }
+
+                return result;
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("There are no intersections between the sets.");
+            }
+
+            return new IntegerSet();
+
+
         }
 
         /// <summary>
@@ -72,13 +114,34 @@ namespace MyIntegerSet
         /// </summary>
         /// <param name="otherSet">The other IntegerSet object.</param>
         /// <returns>The resultant set which contains the intersection of the two sets.</returns>
-        public IntegerSet Intersection(IntegerSet otherSet)
+        public IntegerSet Intersection(IntegerSet otherSet)//logical and
         {
-			// TODO Write the Intersection Method
-			// Must use foreach
-			// Must use exception handling
-			
-			return new IntegerSet();
+            // TODO Write the Intersection Method
+            // Must use foreach
+            // Must use exception handling
+
+            IntegerSet result = new IntegerSet();
+            int count = 0;
+
+            try
+            {
+                foreach (bool value in otherSet.Set)
+                {
+                    if (_set[count] == value)
+                    {
+                        result.InsertElement(count);
+                    }
+                    count++;
+                }
+
+                return result;
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("There are no intersections between the sets.");
+            }
+
+            return result;
         }
 
         /// <summary>
