@@ -86,14 +86,20 @@ namespace MyIntegerSet
             {
                 foreach (bool value in otherSet.Set)
                 {
-                    result.InsertElement(count);
+                    if(value == true)
+                    {
+                        result.InsertElement(count);
+                    }
                     count++;
                 }
 
                 count = 0;
                 foreach (bool value in _set)
                 {
-                    result.InsertElement(count);
+                    if(value == true)
+                    {
+                        result.InsertElement(count);
+                    }
                     count++;
                 }
 
@@ -127,11 +133,13 @@ namespace MyIntegerSet
             {
                 foreach (bool value in otherSet.Set)
                 {
-                    if (_set[count] == value)
+                    if (_set[count] == value && value == true)
                     {
                         result.InsertElement(count);
                     }
                     count++;
+
+
                 }
 
                 return result;
