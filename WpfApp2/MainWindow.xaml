@@ -7,6 +7,24 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        
+        <Button x:Name="addButtn" Margin="227,114,493.6,272" Click="Operation_Click">add</Button>
+        <Button x:Name="subButtn" Margin="227,153,493.6,233" Click="Operation_Click">sub</Button>
+        <Button x:Name="mulButtn" Margin="227,192,493.6,194" Click="Operation_Click">mul</Button>
+        <Button x:Name="divButtn" Margin="227,231,493.6,155" Click="Operation_Click">div</Button>
+        <Button x:Name="exitButtn" Margin="711,376,9.6,10" Click="Exit_Button_Click">exit</Button>
+        <Button x:Name="goButtn" Margin="502,173,218.6,213" Click="Update_TextBox_Click">clear</Button>
+
+        <TextBlock Margin="97,74,627.6,314" FontSize="18" Text="Input 1"/>
+        <TextBlock Margin="363,74,361.6,314" FontSize="18" Text="Input 2"/>
+        <TextBlock Margin="630,74,94.6,314" FontSize="18" Text="Result"/>
+
+        <TextBlock x:Name="resultText" Margin="630,176,94.6,212" FontSize="18" Text="{Binding Path=OutputBox}"/>
+
+
+        <TextBox x:Name="inputBox1" Margin="60,166,605.6,208" Text="{Binding Path=InputBox_Left}" KeyDown="Input_TextBox_KeyDown"></TextBox>
+        <!--input-->
+        <TextBox x:Name="inputBox2" Margin="340,166,325.6,208" Text="{Binding Path=InputBox_Right}" KeyDown="Input_TextBox_KeyDown"></TextBox>
+        <!--input2-->
+
     </Grid>
 </Window>
