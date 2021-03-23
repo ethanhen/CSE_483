@@ -24,6 +24,8 @@ namespace HW1
         IntegerSet s1 = new IntegerSet();
         IntegerSet s2 = new IntegerSet();
 
+        bool errorFlag = false;
+
         int temp;
 
         // called on update click
@@ -53,7 +55,7 @@ namespace HW1
                     if (!int.TryParse(x, out temp))
                     {
                         // display error message and clear outputs
-                        inputError("Please only enter integers separated by commas!");
+                        errorFlag = true;
                         break;
                     }
                     else
@@ -68,7 +70,7 @@ namespace HW1
                 {
                     if (!int.TryParse(x, out temp))
                     {
-                        inputError("Please only enter integers separated by commas!");
+                        errorFlag = true;
                         break;
                     }
                     else
@@ -77,25 +79,33 @@ namespace HW1
                     }
                 }
 
-                // transfer elements from lists to integerset objects
-                foreach(int x in set1)
+                // if there was no error, compute the sets
+                // otherwise display error message
+                if (!errorFlag)
                 {
-                    s1.InsertElement(x);
-                }
+                    // transfer elements from lists to integerset objects
+                    foreach (int x in set1)
+                    {
+                        s1.InsertElement(x);
+                    }
 
-                foreach (int x in set2)
+                    foreach (int x in set2)
+                    {
+                        s2.InsertElement(x);
+                    }
+
+                    // calculate union and intersection
+                    IntegerSet unionSet = s1.Union(s2);
+                    IntegerSet intersectionSet = s1.Intersection(s2);
+
+                    // display results
+                    UnionBox = unionSet.ToString();
+                    IntersectionBox = intersectionSet.ToString();
+                }
+                else
                 {
-                    s2.InsertElement(x);
+                    inputError("Please only enter integers separated by commas!");
                 }
-
-                // calculate union and intersection
-                IntegerSet unionSet = s1.Union(s2);
-                IntegerSet intersectionSet = s1.Intersection(s2);
-
-                // display results
-                UnionBox = unionSet.ToString();
-                IntersectionBox = intersectionSet.ToString();
-
             }
         }
 
