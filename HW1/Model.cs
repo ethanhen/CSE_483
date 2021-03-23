@@ -11,55 +11,64 @@ namespace HW1
 {
     class Model : INotifyPropertyChanged
     {
+
+        // string arrays for split()
+        string[] set1String = null;
+        string[] set2String = null;
+
+        // lists because lists > arrays
+        List<int> set1 = new List<int>();
+        List<int> set2 = new List<int>();
+
+        // sets for set operations
+        IntegerSet s1 = new IntegerSet();
+        IntegerSet s2 = new IntegerSet();
+
+        int temp;
+
+        // called on update click
         public void Update()
         {
+            // clear any error messages in the status box
             StatusBox = "";
 
-            string[] set1String = null;
-            string[] set2String = null;
-
-            List<int> set1 = new List<int>();
-            List<int> set2 = new List<int>();
-
-            int temp;
-
-            IntegerSet s1 = new IntegerSet();
-            IntegerSet s2 = new IntegerSet();
-
-
+            // check if either input is null or empty
             if (Input1Box == null || Input2Box == null || Input1Box == "" || Input2Box == "")
             {
-                StatusBox = "You cannot enter empty sets!";
-                UnionBox = "";
-                IntersectionBox = "";
+                // display error message and clear outputs
+                inputError("You cannot enter empty sets!");
             }
             else
             {
+                // use the split operation to put data into strings
+                // using string arrays as there can be non-integer
+                // inputs which we will deal with later.
                 set1String = Input1Box.Split(',');
                 set2String = Input2Box.Split(',');
 
+                // iterate through each item in the string array that we created
                 foreach(string x in set1String)
                 {
+                    // check to make sure the array only has integers
                     if (!int.TryParse(x, out temp))
                     {
-                        StatusBox = "Please only enter integers separated by commas!";
-                        UnionBox = "";
-                        IntersectionBox = "";
+                        // display error message and clear outputs
+                        inputError("Please only enter integers separated by commas!");
                         break;
                     }
                     else
                     {
+                        // otherwise add to list of integers
                         set1.Add(temp);
                     }
                 }
 
+                // iterate through other string array, same as other loop
                 foreach (string x in set2String)
                 {
                     if (!int.TryParse(x, out temp))
                     {
-                        StatusBox = "Please only enter integers separated by commas!";
-                        UnionBox = "";
-                        IntersectionBox = "";
+                        inputError("Please only enter integers separated by commas!");
                         break;
                     }
                     else
@@ -68,6 +77,7 @@ namespace HW1
                     }
                 }
 
+                // transfer elements from lists to integerset objects
                 foreach(int x in set1)
                 {
                     s1.InsertElement(x);
@@ -78,15 +88,25 @@ namespace HW1
                     s2.InsertElement(x);
                 }
 
+                // calculate union and intersection
                 IntegerSet unionSet = s1.Union(s2);
                 IntegerSet intersectionSet = s1.Intersection(s2);
 
+                // display results
                 UnionBox = unionSet.ToString();
                 IntersectionBox = intersectionSet.ToString();
 
             }
         }
 
+        public void inputError(string message)
+        {
+            StatusBox = message;
+            UnionBox = "";
+            IntersectionBox = "";
+        }
+
+        #region Input and Output Boxes
         private String _input1Box;
         public String Input1Box
         {
@@ -146,6 +166,7 @@ namespace HW1
                 OnPropertyChanged("StatusBox");
             }
         }
+        #endregion
 
         #region Data Binding Stuff
         // define our property chage event handler, part of data binding
