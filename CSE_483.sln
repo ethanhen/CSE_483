@@ -3,21 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31019.35
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp1", "ConsoleApp1\ConsoleApp1.csproj", "{2770D859-9BC6-44D2-94BA-3746D5C7ECB7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IntegerSet", "ConsoleApp1\IntegerSet.csproj", "{2770D859-9BC6-44D2-94BA-3746D5C7ECB7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfApp1", "WpfApp1\WpfApp1.csproj", "{4E7E5626-3158-48EE-B3A3-BFFBC5CB8016}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Calculator", "WpfApp1\Calculator.csproj", "{4E7E5626-3158-48EE-B3A3-BFFBC5CB8016}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfApp2", "WpfApp2\WpfApp2.csproj", "{2CF1DC59-7CE8-440C-AF77-B1428FAB7F30}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataBoundCalculator", "WpfApp2\DataBoundCalculator.csproj", "{2CF1DC59-7CE8-440C-AF77-B1428FAB7F30}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleDataBindingDemo", "..\..\..\Desktop\SimpleDataBindingDemo\SimpleDataBindingDemo.csproj", "{FCE661A7-9A33-4D74-874E-C31D1CFD7576}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RandomShapes", "WpfApp3\RandomShapes.csproj", "{B7930F4A-ABCB-4C24-8522-41703DD28FCB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Layout_Canvas", "..\..\..\Desktop\483\Layout_Canvas\Layout_Canvas.csproj", "{CC9FBBAC-5563-4F68-90EF-AD444B02F994}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Layout_Grids", "..\..\..\Desktop\483\Layout_Grids\Layout_Grids.csproj", "{B3F97748-29A4-4AC3-A95F-506AA6618F97}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Layout_StackPanels", "..\..\..\Desktop\483\Layout_StackPanels\Layout_StackPanels.csproj", "{5FD0690D-B59E-478B-AABE-2E79B9F9BAE4}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfApp3", "WpfApp3\WpfApp3.csproj", "{B7930F4A-ABCB-4C24-8522-41703DD28FCB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HW1", "HW1\HW1.csproj", "{97BBB672-DADB-445E-BA62-386AAB2F64B9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -37,26 +31,14 @@ Global
 		{2CF1DC59-7CE8-440C-AF77-B1428FAB7F30}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2CF1DC59-7CE8-440C-AF77-B1428FAB7F30}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2CF1DC59-7CE8-440C-AF77-B1428FAB7F30}.Release|Any CPU.Build.0 = Release|Any CPU
-		{FCE661A7-9A33-4D74-874E-C31D1CFD7576}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FCE661A7-9A33-4D74-874E-C31D1CFD7576}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FCE661A7-9A33-4D74-874E-C31D1CFD7576}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{FCE661A7-9A33-4D74-874E-C31D1CFD7576}.Release|Any CPU.Build.0 = Release|Any CPU
-		{CC9FBBAC-5563-4F68-90EF-AD444B02F994}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{CC9FBBAC-5563-4F68-90EF-AD444B02F994}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{CC9FBBAC-5563-4F68-90EF-AD444B02F994}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{CC9FBBAC-5563-4F68-90EF-AD444B02F994}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B3F97748-29A4-4AC3-A95F-506AA6618F97}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B3F97748-29A4-4AC3-A95F-506AA6618F97}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B3F97748-29A4-4AC3-A95F-506AA6618F97}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B3F97748-29A4-4AC3-A95F-506AA6618F97}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5FD0690D-B59E-478B-AABE-2E79B9F9BAE4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5FD0690D-B59E-478B-AABE-2E79B9F9BAE4}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5FD0690D-B59E-478B-AABE-2E79B9F9BAE4}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5FD0690D-B59E-478B-AABE-2E79B9F9BAE4}.Release|Any CPU.Build.0 = Release|Any CPU
 		{B7930F4A-ABCB-4C24-8522-41703DD28FCB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{B7930F4A-ABCB-4C24-8522-41703DD28FCB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B7930F4A-ABCB-4C24-8522-41703DD28FCB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B7930F4A-ABCB-4C24-8522-41703DD28FCB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{97BBB672-DADB-445E-BA62-386AAB2F64B9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{97BBB672-DADB-445E-BA62-386AAB2F64B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{97BBB672-DADB-445E-BA62-386AAB2F64B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{97BBB672-DADB-445E-BA62-386AAB2F64B9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
