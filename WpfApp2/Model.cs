@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel;
 
-namespace WpfApp2
+namespace DataBoundCalculator
 {
     class Model : INotifyPropertyChanged
     {
