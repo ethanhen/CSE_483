@@ -1,4 +1,8 @@
-﻿using System;
+﻿///////////////////////////////////////////////
+// Author - Ethan Hensley and Robert Kashian //
+///////////////////////////////////////////////
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,7 +15,7 @@ namespace HW1
 {
     class Model : INotifyPropertyChanged
     {
-
+        #region Declarations
         // string arrays for split()
         string[] set1String = null;
         string[] set2String = null;
@@ -27,6 +31,7 @@ namespace HW1
         bool errorFlag = false;
 
         int temp;
+        #endregion
 
         // called on update click
         public void Update()
@@ -109,12 +114,17 @@ namespace HW1
             }
         }
 
+        #region Custom Functions
+        /// <summary>
+        /// Prints and error message and clears the output boxes
+        /// </summary>
         public void inputError(string message)
         {
             StatusBox = message;
             UnionBox = "";
             IntersectionBox = "";
         }
+        #endregion
 
         #region Input and Output Boxes
         private String _input1Box;
