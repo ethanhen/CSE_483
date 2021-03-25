@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RandomShapes", "WpfApp3\Ran
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HW1", "HW1\HW1.csproj", "{97BBB672-DADB-445E-BA62-386AAB2F64B9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ObservableCollections", "ObservableCollections\ObservableCollections.csproj", "{C8A20FF2-ECBC-427F-9F05-9C284BFFAC5A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{97BBB672-DADB-445E-BA62-386AAB2F64B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{97BBB672-DADB-445E-BA62-386AAB2F64B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{97BBB672-DADB-445E-BA62-386AAB2F64B9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C8A20FF2-ECBC-427F-9F05-9C284BFFAC5A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C8A20FF2-ECBC-427F-9F05-9C284BFFAC5A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C8A20FF2-ECBC-427F-9F05-9C284BFFAC5A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C8A20FF2-ECBC-427F-9F05-9C284BFFAC5A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
