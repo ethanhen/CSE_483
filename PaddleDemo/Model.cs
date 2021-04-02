@@ -19,7 +19,7 @@ using System.Windows;
 
 // Rectangle
 // Must update References manually
-//using System.Drawing;
+using System.Drawing;
 
 // INotifyPropertyChanged
 using System.ComponentModel;
@@ -30,61 +30,12 @@ using System.Windows.Threading;
 // Timer.Timer
 using System.Timers;
 
-using System.Drawing;
-
 namespace PaddleDemo
 {
     public partial class Model : INotifyPropertyChanged
     {
 
-        private string _leftMouseButtonStatus = "UP";
-        public string leftMouseButtonStatus
-        {
-            get { return _leftMouseButtonStatus; }
-            set
-            {
-                _leftMouseButtonStatus = value;
-                OnPropertyChanged("leftMouseButtonStatus");
-            }
-        }
-
-        private string _rightMouseButtonStatus = "UP";
-        public string rightMouseButtonStatus
-        {
-            get { return _rightMouseButtonStatus; }
-            set
-            {
-                _rightMouseButtonStatus = value;
-                OnPropertyChanged("rightMouseButtonStatus");
-            }
-        }
-
-        public void ProcessMouseDrag(uint x, uint y)
-        {
-            ballCanvasLeft = x - BallWidth / 2;
-            ballCanvasTop = y - BallHeight / 2;
-
-        }
-
-        public void ProcessLMBDown()
-        {
-            leftMouseButtonStatus = "DOWN";
-        }
-
-        public void ProcessLMBUp()
-        {
-            leftMouseButtonStatus = "UP";
-        }
-
-        public void ProcessRMBDown()
-        {
-            rightMouseButtonStatus = "DOWN";
-        }
-
-        public void ProcessRMBUp()
-        {
-            rightMouseButtonStatus = "UP";
-        }
+        public bool lmb = false;
 
         public event PropertyChangedEventHandler PropertyChanged;
         private void OnPropertyChanged(string propertyName)
@@ -96,10 +47,22 @@ namespace PaddleDemo
         }
 
         Random _randomNumber = new Random();
-        S_paddleRectangle;
+        System.Drawing.Rectangle _paddleRectangle;
         bool _movepaddleLeft = false;
         bool _movepaddleRight = false;
         uint _paddleMoveSize = 10;
+
+        public void ProcessMouseDrag(uint x, uint y)
+        {
+            //if (lmb)
+           // {
+                ballCanvasLeft = x - BallWidth / 2;
+                ballCanvasTop = y - BallHeight / 2;
+            //}
+            
+
+        }
+
 
 #if THREADING_TIMER
         // .NET Threading.Timer
@@ -133,8 +96,6 @@ namespace PaddleDemo
         {
         }
 
-
-
         public void InitModel()
         {
 #if THREADING_TIMER
@@ -159,7 +120,7 @@ namespace PaddleDemo
 
 
         public void SetStartPosition()
-        {
+        {            
             paddleWidth = 120;
             paddleHeight = 50;
 
@@ -197,8 +158,8 @@ namespace PaddleDemo
                 paddleCanvasLeft -= _paddleMoveSize;
             else if (_movepaddleRight && paddleCanvasLeft < _windowWidth - paddleWidth)
                 paddleCanvasLeft += _paddleMoveSize;
-
+            
             _paddleRectangle = new System.Drawing.Rectangle((int)paddleCanvasLeft, (int)paddleCanvasTop, (int)paddleWidth, (int)paddleHeight);
-        }
+        }  
     }
 }

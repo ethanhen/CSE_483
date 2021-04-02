@@ -17,7 +17,7 @@
             Margin="0,0,0,0" 
             Height="458" 
             Width="730"
-            Background="BlanchedAlmond" MouseRightButtonDown="BallCanvas_MouseRightButtonDown_1">
+            Background="BlanchedAlmond" MouseMove="BallCanvas_MouseMove_1" MouseRightButtonDown="MouseRightDown">
             <Rectangle
                 Canvas.Top ="{Binding paddleCanvasTop}"
                 Canvas.Left="{Binding paddleCanvasLeft}"
@@ -29,7 +29,7 @@
                 Canvas.Top="{Binding ballCanvasTop}" 
                 Canvas.Left="{Binding ballCanvasLeft}"  
                 Width="{Binding BallWidth}" 
-                Height="{Binding BallHeight}" MouseLeftButtonDown="Ellipse_MouseLeftButtonDown">
+                Height="{Binding BallHeight}" MouseLeftButtonDown="MouseLeftDown" MouseLeftButtonUp="MouseLeftUp">
                 <Ellipse.Fill>
                     <RadialGradientBrush GradientOrigin="0.75,0.25">
                         <GradientStop Color="Yellow" Offset="0.0" />
