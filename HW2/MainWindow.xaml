@@ -5,8 +5,34 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HW2"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="599" Width="525">
     <Grid>
-        
+        <ItemsControl  x:Name="MyItemsControl" Width="300" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,10,0,0">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Button Click="Button_Click" Height="100.0" Width="100.0" Name="Foo">
+                        <TextBlock Text="{Binding TileLabel}" 
+                                   Foreground="{Binding TileBrush}" 
+                                   FontSize="60" FontWeight="Bold" 
+                                   HorizontalAlignment="Center" 
+                                   VerticalAlignment="Center">
+                        </TextBlock>
+                    </Button>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <!-- A WrapPanel ensures the items wrap to the next line -->
+                    <!-- when it runs out of room in the window dimensions -->
+                    <WrapPanel Orientation="Horizontal"/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+        </ItemsControl>
+        <Label x:Name="Error_Label" Content="{Binding Path=StatusText}" Background="Beige"  
+               HorizontalAlignment="Left" Margin="99,467,0,0" VerticalAlignment="Top" 
+               Width="310" Height="58"/>
+        <Button x:Name="Clear_Button" Click="Clear_Button_Click" Content="Clear" FontSize="28" 
+                Foreground="Blue" FontWeight="Bold"  HorizontalAlignment="Left" 
+                Margin="334,345,0,0" VerticalAlignment="Top" Width="75"/>
     </Grid>
 </Window>
