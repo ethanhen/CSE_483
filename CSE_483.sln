@@ -19,6 +19,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MousePosition", "..\..\Desk
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PaddleDemo", "PaddleDemo\PaddleDemo.csproj", "{A0BD60CB-C53B-4F80-B48E-E02363908876}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HW2", "HW2\HW2.csproj", "{FD2BE510-89C9-4B1D-A15A-1566610E0BB3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -57,6 +59,10 @@ Global
 		{A0BD60CB-C53B-4F80-B48E-E02363908876}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A0BD60CB-C53B-4F80-B48E-E02363908876}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A0BD60CB-C53B-4F80-B48E-E02363908876}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FD2BE510-89C9-4B1D-A15A-1566610E0BB3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FD2BE510-89C9-4B1D-A15A-1566610E0BB3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FD2BE510-89C9-4B1D-A15A-1566610E0BB3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FD2BE510-89C9-4B1D-A15A-1566610E0BB3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
