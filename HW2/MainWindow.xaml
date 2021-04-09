@@ -13,6 +13,7 @@
                     <Button Click="Button_Click" Height="100.0" Width="100.0" Name="Foo">
                         <TextBlock Text="{Binding TileLabel}" 
                                    Foreground="{Binding TileBrush}" 
+                                   Background="{Binding TileBackground}"
                                    FontSize="60" FontWeight="Bold" 
                                    HorizontalAlignment="Center" 
                                    VerticalAlignment="Center">

@@ -90,8 +90,7 @@ namespace HW2
         /// <returns></returns>
         public void UserSelection(String buttonSelected)
         {
-            Debug.Write("Button selected was " + buttonSelected + "\n");
-
+            
             int index = int.Parse(buttonSelected);
 
             if (!TileCollection[index].TileTaken)
@@ -105,7 +104,7 @@ namespace HW2
                 else
                 {
                     TileCollection[index].TileLabel = "O";
-                    TileCollection[index].TileBrush = new SolidColorBrush(Color.FromArgb(255, 255, 0, 0));
+                    TileCollection[index].TileBrush = Brushes.Red;
                 }
 
                 AddScores(index, turn);
@@ -152,7 +151,9 @@ namespace HW2
                 turn++;
             }
         }
-
+        /// <summary>
+        /// Highlights the winning combination
+        /// </summary>
         public void highlightWin(bool[] input)
         {
             int x;
@@ -277,7 +278,6 @@ namespace HW2
                     break;
             }
         }
-
 
         /// <summary>
         /// resets all buttons back to their starting point

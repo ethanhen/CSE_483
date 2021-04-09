@@ -65,7 +65,7 @@ namespace HW2
             }
         }
 
-        private Brush _tileBackground = Brushes.Coral;
+        private Brush _tileBackground;
         public Brush TileBackground
         {
             get { return _tileBackground; }
