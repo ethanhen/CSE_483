@@ -18,7 +18,7 @@ using System.Windows.Media.Imaging;
 using System.Windows;
 
 // hi res timer
-using HighPrecisionTimer;
+using System.Threading;
 
 // Rectangle
 // Must update References manually
@@ -45,8 +45,8 @@ namespace BouncingBall
         private UInt32[] _buttonPresses = new UInt32[_numBalls];
         Random _randomNumber = new Random();
     
-        private MultimediaTimer _ballHiResTimer;
-        private MultimediaTimer _paddleHiResTimer;
+        //private MultimediaTimer _ballHiResTimer;
+        //private MultimediaTimer _paddleHiResTimer;
         private double _ballXMove = 1;
         private double _ballYMove = 1;
         System.Drawing.Rectangle _ballRectangle;
@@ -54,6 +54,10 @@ namespace BouncingBall
         bool _movepaddleLeft = false;
         bool _movepaddleRight = false;
         private bool _moveBall = false;
+
+        private Thread threadX = null;
+        private bool threadSuspended = false;
+
         public bool MoveBall
         {
             get { return _moveBall; }
@@ -82,22 +86,80 @@ namespace BouncingBall
         {
         }
 
+        public void threadFunction()
+        {
+            while (!threadSuspended)
+            {
+                //if (!_moveBall)
+                    //return;
+
+                ballCanvasLeft += _ballXMove;
+                ballCanvasTop += _ballYMove;
+
+                // check to see if ball has it the left or right side of the drawing element
+                if ((ballCanvasLeft + BallWidth >= _windowWidth) ||
+                    (ballCanvasLeft <= 0))
+                    _ballXMove = -_ballXMove;
+
+
+                // check to see if ball has it the top of the drawing element
+                if (ballCanvasTop <= 0)
+                    _ballYMove = -_ballYMove;
+
+                if (ballCanvasTop + BallWidth >= _windowHeight)
+                {
+                    // we hit bottom. stop moving the ball
+                    _moveBall = false;
+                }
+
+                // see if we hit the paddle
+                _ballRectangle = new System.Drawing.Rectangle((int)ballCanvasLeft, (int)ballCanvasTop, (int)BallWidth, (int)BallHeight);
+                if (_ballRectangle.IntersectsWith(_paddleRectangle))
+                {
+                    // hit paddle. reverse direction in Y direction
+                    _ballYMove = -_ballYMove;
+
+                    // move the ball away from the paddle so we don't intersect next time around and
+                    // get stick in a loop where the ball is bouncing repeatedly on the paddle
+                    ballCanvasTop += 2 * _ballYMove;
+
+                    // add move the ball in X some small random value so that ball is not traveling in the same 
+                    // pattern
+                    ballCanvasLeft += _randomNumber.Next(5);
+                }
+
+                if (_movepaddleLeft && paddleCanvasLeft > 0)
+                    paddleCanvasLeft -= 2;
+                else if (_movepaddleRight && paddleCanvasLeft < _windowWidth - paddleWidth)
+                    paddleCanvasLeft += 2;
+
+                _paddleRectangle = new System.Drawing.Rectangle((int)paddleCanvasLeft, (int)paddleCanvasTop, (int)paddleWidth, (int)paddleHeight);
+
+                Thread.Sleep(5);
+            }
+        }
+
         public void InitModel()
         {
-            // create our multi-media timers
+            threadX = new Thread(new ThreadStart(threadFunction));
+            threadX.Start();
+
+           /* // create our multi-media timers
             _ballHiResTimer = new MultimediaTimer() { Interval = 4 };
             _ballHiResTimer.Elapsed += BallMMTimerCallback;
             _ballHiResTimer.Start();
 
             _paddleHiResTimer = new MultimediaTimer() { Interval = 3 };
             _paddleHiResTimer.Elapsed += PaddleMMTimerCallback;
-            _paddleHiResTimer.Start();
+            _paddleHiResTimer.Start(); */
         }
 
         public void CleanUp()
         {
-            _ballHiResTimer.Stop();
-            _paddleHiResTimer.Stop();
+            //_ballHiResTimer.Stop();
+            //_paddleHiResTimer.Stop();
+            threadSuspended = true;
+            threadX.Abort();
         }
 
 
