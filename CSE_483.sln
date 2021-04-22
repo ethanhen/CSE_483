@@ -25,6 +25,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PushBallCollection", "PushB
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BouncingBall", "BouncingBall\BouncingBall.csproj", "{83F2314A-8521-417F-BCE7-4CFF447242BF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExampleUdpClient", "ExampleUdpClient\ExampleUdpClient.csproj", "{384E192E-28DE-4BD2-800E-4CE07EBF43B7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExampleUdpServer", "ExampleUdpServer\ExampleUdpServer.csproj", "{4EF5BA0E-278B-4005-9037-FED1A5F15B18}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -75,6 +79,14 @@ Global
 		{83F2314A-8521-417F-BCE7-4CFF447242BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{83F2314A-8521-417F-BCE7-4CFF447242BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{83F2314A-8521-417F-BCE7-4CFF447242BF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{384E192E-28DE-4BD2-800E-4CE07EBF43B7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{384E192E-28DE-4BD2-800E-4CE07EBF43B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{384E192E-28DE-4BD2-800E-4CE07EBF43B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{384E192E-28DE-4BD2-800E-4CE07EBF43B7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4EF5BA0E-278B-4005-9037-FED1A5F15B18}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4EF5BA0E-278B-4005-9037-FED1A5F15B18}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4EF5BA0E-278B-4005-9037-FED1A5F15B18}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4EF5BA0E-278B-4005-9037-FED1A5F15B18}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
