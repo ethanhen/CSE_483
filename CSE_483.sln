@@ -29,6 +29,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExampleUdpClient", "Example
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExampleUdpServer", "ExampleUdpServer\ExampleUdpServer.csproj", "{4EF5BA0E-278B-4005-9037-FED1A5F15B18}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinalProjectClock", "FinalProjectClock\FinalProjectClock.csproj", "{71AF93FE-1A3C-4A9F-8753-78564A672E99}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinalProjectServer", "FinalProjectServer\FinalProjectServer.csproj", "{3FFED5EF-D947-442D-A1FC-E4584411B120}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -87,6 +91,14 @@ Global
 		{4EF5BA0E-278B-4005-9037-FED1A5F15B18}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4EF5BA0E-278B-4005-9037-FED1A5F15B18}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4EF5BA0E-278B-4005-9037-FED1A5F15B18}.Release|Any CPU.Build.0 = Release|Any CPU
+		{71AF93FE-1A3C-4A9F-8753-78564A672E99}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{71AF93FE-1A3C-4A9F-8753-78564A672E99}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{71AF93FE-1A3C-4A9F-8753-78564A672E99}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{71AF93FE-1A3C-4A9F-8753-78564A672E99}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3FFED5EF-D947-442D-A1FC-E4584411B120}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3FFED5EF-D947-442D-A1FC-E4584411B120}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3FFED5EF-D947-442D-A1FC-E4584411B120}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3FFED5EF-D947-442D-A1FC-E4584411B120}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
