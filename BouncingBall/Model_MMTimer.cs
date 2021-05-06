@@ -18,7 +18,7 @@ using System.Windows.Media.Imaging;
 using System.Windows;
 
 // hi res timer
-using PrecisionTimers;
+using HighPrecisionTimer;
 
 // Rectangle
 // Must update References manually
@@ -29,8 +29,13 @@ using System.ComponentModel;
 
 namespace BouncingBall
 {
+
     public partial class Model : INotifyPropertyChanged
     {
+
+        public ObservableCollection<MyShape> Row1Collection;
+        public ObservableCollection<MyShape> Row2Collection;
+        public ObservableCollection<MyShape> Row3Collection;
 
         public event PropertyChangedEventHandler PropertyChanged;
         private void OnPropertyChanged(string propertyName)
@@ -44,10 +49,10 @@ namespace BouncingBall
         private static UInt32 _numBalls = 1;
         private UInt32[] _buttonPresses = new UInt32[_numBalls];
         Random _randomNumber = new Random();
-        private TimerQueueTimer.WaitOrTimerDelegate _ballTimerCallbackDelegate;
-        private TimerQueueTimer.WaitOrTimerDelegate _paddelTimerCallbackDelegate;
-        private TimerQueueTimer _ballHiResTimer;
-        private TimerQueueTimer _paddelHiResTimer;
+        public TimerQueueTimer.WaitOrTimerDelegate _ballTimerCallbackDelegate;
+        public TimerQueueTimer.WaitOrTimerDelegate _paddelTimerCallbackDelegate;
+        public TimerQueueTimer _ballHiResTimer;
+        public TimerQueueTimer _paddelHiResTimer;
         private double _ballXMove = 1;
         private double _ballYMove = 1;
         System.Drawing.Rectangle _ballRectangle;
@@ -55,6 +60,23 @@ namespace BouncingBall
         bool _movePaddelLeft = false;
         bool _movePaddelRight = false;
         private bool _moveBall = false;
+
+        private SolidColorBrush hitColor = new SolidColorBrush();
+        private SolidColorBrush black = new SolidColorBrush();
+
+        public static int row1 = 15;
+        public static int row2 = 9;
+        public static int row3 = 5;
+
+        public int row1Width;
+        public int row2Width;
+        public int row3Width;
+
+        public int brickCount = 0;
+        public int bounceCount = 0;
+
+        System.Drawing.Rectangle _brick;
+
         public bool MoveBall
         {
             get { return _moveBall; }
@@ -85,6 +107,12 @@ namespace BouncingBall
 
         public void InitModel()
         {
+            Row1Collection = new ObservableCollection<MyShape>();
+            Row2Collection = new ObservableCollection<MyShape>();
+            Row3Collection = new ObservableCollection<MyShape>();
+
+            ResetBricks();
+
             // this delegate is needed for the multi media timer defined 
             // in the TimerQueueTimer class.
             _ballTimerCallbackDelegate = new TimerQueueTimer.WaitOrTimerDelegate(BallMMTimerCallback);
@@ -116,6 +144,70 @@ namespace BouncingBall
             }
         }
 
+        public void ResetBricks()
+        {
+            Row1Collection.Clear();
+            Row2Collection.Clear();
+            Row3Collection.Clear();
+
+            row1Width = 900 / row1;
+            row2Width = 900 / row2;
+            row3Width = 900 / row3;
+
+            SolidColorBrush row1color = new SolidColorBrush();
+            SolidColorBrush row2color = new SolidColorBrush();
+            SolidColorBrush row3color = new SolidColorBrush();
+
+            row1color.Color = System.Windows.Media.Color.FromArgb(255, 255, 0, 0);
+            row2color.Color = System.Windows.Media.Color.FromArgb(255, 0, 0, 255);
+            row3color.Color = System.Windows.Media.Color.FromArgb(255, 0, 255, 0);
+
+            black.Color = System.Windows.Media.Color.FromArgb(255, 0, 0, 0);
+
+            hitColor.Color = System.Windows.Media.Color.FromArgb(0, 0, 0, 0);
+
+            for (int i = 0; i < row1; i++)
+            {
+                MyShape temp = new MyShape();
+                temp.Height = 50;
+                temp.Width = row1Width;
+                temp.Fill = row1color;
+                temp.Stroke = black;
+                temp.CanvasTop = 0;
+                temp.CanvasLeft = i * temp.Width;
+                temp.HitCount = 3;
+                temp.Hit = false;
+                Row1Collection.Add(temp);
+            }
+
+            for (int i = 0; i < row2; i++)
+            {
+                MyShape temp = new MyShape();
+                temp.Height = 50;
+                temp.Width = row2Width;
+                temp.Fill = row2color;
+                temp.Stroke = black;
+                temp.CanvasTop = 0;
+                temp.CanvasLeft = i * temp.Width;
+                temp.HitCount = 2;
+                temp.Hit = false;
+                Row2Collection.Add(temp);
+            }
+            for (int i = 0; i < row3; i++)
+            {
+                MyShape temp = new MyShape();
+                temp.Height = 50;
+                temp.Width = row3Width;
+                temp.Fill = row3color;
+                temp.Stroke = black;
+                temp.CanvasTop = 0;
+                temp.CanvasLeft = i * temp.Width;
+                temp.HitCount = 1;
+                temp.Hit = false;
+                Row3Collection.Add(temp);
+            }
+        }
+
         public void CleanUp()
         {
             _ballHiResTimer.Delete();
@@ -129,10 +221,10 @@ namespace BouncingBall
             BallHeight = 25;
             BallWidth = 25;
             PaddelWidth = 120;
-            PaddelHeight = 5;
+            PaddelHeight = 10;
 
-            BallCanvasLeft = _windowWidth/2 - BallWidth/2;
-            BallCanvasTop = _windowHeight/3;
+            BallCanvasLeft = 400;
+            BallCanvasTop = 300;
            
             _moveBall = false;
 
@@ -203,7 +295,76 @@ namespace BouncingBall
                 BallCanvasLeft += _randomNumber.Next(5);
             }
 
-             // done in callback. OK to delete timer
+            foreach (MyShape shape in Row3Collection)
+            {
+                _ballRectangle = new System.Drawing.Rectangle((int)ballCanvasLeft, (int)ballCanvasTop, (int)BallWidth, (int)BallHeight);
+                _brick = new System.Drawing.Rectangle(((int)shape.CanvasLeft), 100, (int)shape.Width, (int)shape.Height);
+                if (_ballRectangle.IntersectsWith(_brick) && !shape.Hit && (bounceCount < 1))
+                {
+                    bounceCount++;
+                    _ballYMove = -_ballYMove;
+                    ballCanvasTop -= 5 * _ballYMove;
+                    ballCanvasLeft += _randomNumber.Next(5);
+                    shape.HitCount--;
+                    if (shape.HitCount == 0)
+                    {
+                        shape.Hit = true;
+                        shape.Fill = hitColor;
+                        shape.Stroke = hitColor;
+                    }
+                }
+                brickCount++;
+            }
+            bounceCount = 0;
+            brickCount = 0;
+
+            foreach (MyShape shape in Row2Collection)
+            {
+                _ballRectangle = new System.Drawing.Rectangle((int)ballCanvasLeft, (int)ballCanvasTop, (int)BallWidth, (int)BallHeight);
+                _brick = new System.Drawing.Rectangle(((int)shape.CanvasLeft), 50, (int)shape.Width, (int)shape.Height);
+                if (_ballRectangle.IntersectsWith(_brick) && !shape.Hit)
+                {
+                    bounceCount++;
+                    _ballYMove = -_ballYMove;
+                    ballCanvasTop -= 5 * _ballYMove;
+                    ballCanvasLeft += _randomNumber.Next(5);
+                    shape.HitCount--;
+                    if (shape.HitCount == 0)
+                    {
+                        shape.Hit = true;
+                        shape.Fill = hitColor;
+                        shape.Stroke = hitColor;
+                    }
+                }
+                brickCount++;
+            }
+            bounceCount = 0;
+            brickCount = 0;
+
+            foreach (MyShape shape in Row1Collection)
+            {
+                _ballRectangle = new System.Drawing.Rectangle((int)ballCanvasLeft, (int)ballCanvasTop, (int)BallWidth, (int)BallHeight);
+                _brick = new System.Drawing.Rectangle(((int)shape.CanvasLeft), 0, (int)shape.Width, (int)shape.Height);
+                if (_ballRectangle.IntersectsWith(_brick) && !shape.Hit)
+                {
+                    bounceCount++;
+                    _ballYMove = -_ballYMove;
+                    ballCanvasTop -= 5 * _ballYMove;
+                    ballCanvasLeft += _randomNumber.Next(5);
+                    shape.HitCount--;
+                    if (shape.HitCount == 0)
+                    {
+                        shape.Hit = true;
+                        shape.Fill = hitColor;
+                        shape.Stroke = hitColor;
+                    }
+                }
+                brickCount++;
+            }
+            bounceCount = 0;
+            brickCount = 0;
+
+            // done in callback. OK to delete timer
             _ballHiResTimer.DoneExecutingCallback();
         }
 

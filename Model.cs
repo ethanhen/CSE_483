@@ -87,7 +87,7 @@ namespace BouncingBall
         }
 
         private double _windowHeight = 100;
-        public double WindowHeight
+        public double WindowHeightd
         {
             get { return _windowHeight; }
             set { _windowHeight = value; }
@@ -177,7 +177,6 @@ namespace BouncingBall
                         shape.Hit = true;
                         shape.Fill = hitColor;
                         shape.Stroke = hitColor;
-                        break;
                     }
                     brickCount++;
                 }
@@ -198,7 +197,6 @@ namespace BouncingBall
                         shape.Hit = true;
                         shape.Fill = hitColor;
                         shape.Stroke = hitColor;
-                        break;
                     }
                     brickCount++;
                 }
@@ -219,7 +217,6 @@ namespace BouncingBall
                         shape.Hit = true;
                         shape.Fill = hitColor;
                         shape.Stroke = hitColor;
-                        break;
                     }
                     brickCount++;
                 }
@@ -244,6 +241,7 @@ namespace BouncingBall
             Row1Collection = new ObservableCollection<MyShape>();
             Row2Collection = new ObservableCollection<MyShape>();
             Row3Collection = new ObservableCollection<MyShape>();
+            Score = 0.ToString();
 
             ResetBricks();
 
@@ -280,8 +278,6 @@ namespace BouncingBall
             black.Color = System.Windows.Media.Color.FromArgb(255, 0, 0, 0);
 
             hitColor.Color = System.Windows.Media.Color.FromArgb(0, 0, 0, 0);
-
-            Score = 0.ToString();
 
             for (int i = 0; i < row1; i++)
             {

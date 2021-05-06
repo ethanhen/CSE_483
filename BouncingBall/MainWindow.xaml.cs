@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+
 namespace BouncingBall
 {
     /// <summary>
@@ -41,6 +42,10 @@ namespace BouncingBall
             _model.InitModel();
             _model.SetStartPosition();
 
+            Row1Bricks.ItemsSource = _model.Row1Collection;
+            Row2Bricks.ItemsSource = _model.Row2Collection;
+            Row3Bricks.ItemsSource = _model.Row3Collection;
+
         }
 
         private void KeypadDown(object sender, KeyEventArgs e)
@@ -49,10 +54,21 @@ namespace BouncingBall
                 _model.MoveLeft(true);
             else if (e.Key == Key.Right)
                 _model.MoveRight(true);
-            else if (e.Key == Key.S)
+            else if (e.Key == Key.P)
                 _model.MoveBall = !_model.MoveBall;
             else if (e.Key == Key.R)
+            {
+                _model.ResetBricks();
                 _model.SetStartPosition();
+            }
+            else if (e.Key == Key.B)
+                _model.SetStartPosition();
+            else if (e.Key == Key.E)
+            {
+                _model.CleanUp();
+                this.Close();
+            }
+                
         }
 
         private void KeypadUp(object sender, KeyEventArgs e)
@@ -61,6 +77,7 @@ namespace BouncingBall
                 _model.MoveLeft(false);
             else if (e.Key == Key.Right)
                 _model.MoveRight(false);
+            
         }
 
         private void OnClosing(object sender, System.ComponentModel.CancelEventArgs e)
