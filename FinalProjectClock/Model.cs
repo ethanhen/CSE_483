@@ -7,7 +7,7 @@ using System.ComponentModel;
 using System.Net.Sockets;
 using System.Net;
 using System.Threading;
-
+using System.Collections.ObjectModel;
 
 namespace FinalProjectClock
 {
