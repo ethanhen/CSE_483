@@ -35,6 +35,7 @@ namespace FinalProjectClock
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             _model.CleanUp();
+            this.Close();
         }
     }
 }

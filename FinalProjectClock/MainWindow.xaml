@@ -8,10 +8,10 @@
         Title="MainWindow" Height="200" Width="325">
     <Grid>
         <Canvas Background="Black"  x:Name="MyCanvas" Margin="0,0,0,0">
-            <Ellipse Height ="10" Width="10" Fill="Blue" Canvas.Left="98" Canvas.Top="100"></Ellipse>
-            <Ellipse Height ="10" Width="10" Fill="Blue" Canvas.Left="98" Canvas.Top="75"></Ellipse>
-            <Ellipse Height ="10" Width="10" Fill="Blue" Canvas.Left="198" Canvas.Top="100"></Ellipse>
-            <Ellipse Height ="10" Width="10" Fill="Blue" Canvas.Left="198" Canvas.Top="75"></Ellipse>
+            <Ellipse Height ="10" Width="10" Fill="Lime" Canvas.Left="98" Canvas.Top="100"></Ellipse>
+            <Ellipse Height ="10" Width="10" Fill="Lime" Canvas.Left="98" Canvas.Top="75"></Ellipse>
+            <Ellipse Height ="10" Width="10" Fill="Lime" Canvas.Left="198" Canvas.Top="100"></Ellipse>
+            <Ellipse Height ="10" Width="10" Fill="Lime" Canvas.Left="198" Canvas.Top="75"></Ellipse>
             <ItemsControl x:Name="SevenSegmentLED">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate x:Name="LEDTemplate">

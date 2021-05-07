@@ -26,8 +26,11 @@ namespace FinalProjectClock
 
         public TimeDataDLL.TimeData.StructTimeData clockTime;
         public TimeDataDLL.TimeData.StructTimeData inputTime;
+        public TimeDataDLL.TimeData.StructTimeData alarmTime;
 
         System.Timers.Timer dotNetTimerTimer;
+
+        int showAlarm = 0;
 
         private string _timeFormatAMPM;
         public string TimeFormatAMPM
@@ -97,13 +100,14 @@ namespace FinalProjectClock
             ledCollection[4].LEDLeft = 210;
             ledCollection[5].LEDLeft = 255;
 
-            _alarmVisible = System.Windows.Visibility.Hidden;
+            AlarmVisible = System.Windows.Visibility.Hidden;
         }
 
         public void CleanUp()
         {
             if (_dataSocket != null) _dataSocket.Close();
             if (_receiveDataThread != null) _receiveDataThread.Abort();
+            TimerStart(false);
         }
         private void ReceiveThreadFunction()
         {
@@ -113,19 +117,29 @@ namespace FinalProjectClock
                 try
                 {
                     Byte[] receiveData = _dataSocket.Receive(ref endPoint);
-                    // parse the data into inputTime
-                    // but HOW?!?!?!
-
+                    inputTime = new TimeDataDLL.TimeData.StructTimeData(receiveData[0], receiveData[1], receiveData[2], (receiveData[3] != 0), (receiveData[4] != 0));
                 }
                 catch (SocketException ex)
                 {
                     Console.WriteLine(ex.ToString());
                     return;
                 }
-                setTime(inputTime);
+                if (inputTime.isAlarmTime)
+                {
+                    alarmTime = inputTime;
+                    setTime(clockTime);
+                }
+                else
+                {
+                    clockTime = inputTime;
+                    setTime(clockTime);
+                }
             }
         }
 
+        ///<summary>
+        /// updates the leds
+        ///</summary>
         private void setTime(TimeDataDLL.TimeData.StructTimeData timeInput)
         {
             if (timeInput.is24HourTime)
@@ -144,19 +158,21 @@ namespace FinalProjectClock
                 if (timeInput.hour > 12)
                 {
                     x = (UInt32)timeInput.hour - 12;
-                    _timeFormatAMPM = "PM";
-                    _timeFormatAMPMVisible = System.Windows.Visibility.Visible;
+                    TimeFormatAMPM = "PM";
+                    TimeFormatAMPMVisible = System.Windows.Visibility.Visible;
 
                 }
                 else if (timeInput.hour <= 12)
                 {
                     x = (UInt32)timeInput.hour;
-                    _timeFormatAMPM = "AM";
-                    _timeFormatAMPMVisible = System.Windows.Visibility.Visible;
+                    TimeFormatAMPM = "AM";
+                    TimeFormatAMPMVisible = System.Windows.Visibility.Visible;
                 }
                 else
                 {
                     x = 0;
+                    TimeFormatAMPM = "WHOOPS";
+                    TimeFormatAMPMVisible = System.Windows.Visibility.Visible;
                 }
                 ledCollection[0].LEDValue = (UInt32)(x % 100) / 10;
                 ledCollection[1].LEDValue = (UInt32)(x % 10);
@@ -171,13 +187,34 @@ namespace FinalProjectClock
 
         public bool TimerStart(bool startStop)
         {
-            dotNetTimerTimer = new System.Timers.Timer(1000);
-            dotNetTimerTimer.Elapsed += new ElapsedEventHandler(TimerCallback);
-            dotNetTimerTimer.Start();
+            if (startStop)
+            {
+                dotNetTimerTimer = new System.Timers.Timer(1000);
+                dotNetTimerTimer.Elapsed += new ElapsedEventHandler(TimerCallback);
+                dotNetTimerTimer.Start();
 
-            return true;
+                return true;
+            }
+            else
+            {
+                dotNetTimerTimer.Stop();
+
+                return false;
+            }
         }
 
+        ///<summary>
+        ///Compares time1 and time2 and returns true if they are the same
+        ///</summary>
+        private bool compareTime(TimeDataDLL.TimeData.StructTimeData timeInput1, TimeDataDLL.TimeData.StructTimeData timeInput2) //t1 = alarm, t2 = current time
+        {
+            if(timeInput1.hour == timeInput2.hour && timeInput1.minute == timeInput2.minute && timeInput1.second == timeInput2.second)
+            {
+                return true;
+            }
+            else
+                return false;
+        }
         private void TimerCallback(object o, System.EventArgs e)
         {
 
@@ -185,6 +222,14 @@ namespace FinalProjectClock
             {
                 updateTime();
                 setTime(clockTime);
+                if(compareTime(alarmTime, clockTime))
+                {
+                    AlarmVisible = System.Windows.Visibility.Visible;
+                    showAlarm = 5;
+                }
+                else
+                    AlarmVisible = System.Windows.Visibility.Hidden;
+
             }
             catch (System.Exception ex)
             {
@@ -216,6 +261,7 @@ namespace FinalProjectClock
                 clockTime.minute = 0;
                 clockTime.hour = 0;
             }
+
         }
 
 
