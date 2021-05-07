@@ -24,6 +24,9 @@ namespace ExampleUdpClient
         // over the network
         private UdpClient _dataSocket;
 
+        public TimeDataDLL.TimeData.StructTimeData clockTime;
+
+
 
         public event PropertyChangedEventHandler PropertyChanged;
         private void OnPropertyChanged(string propertyName)
@@ -83,8 +86,10 @@ namespace ExampleUdpClient
 
         public void SendMessage()
         {
+            clockTime = new TimeDataDLL.TimeData.StructTimeData();
+
             IPEndPoint remoteHost = new IPEndPoint(IPAddress.Parse(_remoteIPAddress), (int)_remotePort);
-            Byte[] sendBytes = Encoding.ASCII.GetBytes(MyFriendBox);
+            Byte[] sendBytes = Encoding.ASCII.GetBytes(clockTime.ToString());
 
             try
             {

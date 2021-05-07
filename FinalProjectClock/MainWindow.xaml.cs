@@ -28,6 +28,8 @@ namespace FinalProjectClock
             this.DataContext = _model;
             this.ResizeMode = ResizeMode.NoResize;
 
+            SevenSegmentLED.ItemsSource = _model.ledCollection;
+
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)

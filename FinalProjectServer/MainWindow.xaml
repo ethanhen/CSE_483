@@ -5,8 +5,16 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FinalProjectServer"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+         Title="MainWindow" Height="300" Width="450">
     <Grid>
-        
+        <Button Content="Set Time" HorizontalAlignment="Left" Margin="190,70,0,0" VerticalAlignment="Top" Width="75" Click="Operation_Click" Name="setTimeButton"/>
+        <Button Content="NOW Time" HorizontalAlignment="Left" Margin="190,102,0,0" VerticalAlignment="Top" Width="75" Click="Operation_Click" Name="setNowButton"/>
+        <Button Content="Set Alarm" HorizontalAlignment="Left" Margin="190,134,0,0" VerticalAlignment="Top" Width="75" Click="Operation_Click" Name="setAlarmButton"/>
+        <CheckBox Content="24 Hour Time" HorizontalAlignment="Left" Margin="182,177,0,0" VerticalAlignment="Top" Name="timeFormatBox" IsChecked="{Binding TimeFormat}"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="26,70,0,0" TextWrapping="Wrap" Text="{Binding HourInput}" VerticalAlignment="Top" Width="37"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="68,70,0,0" TextWrapping="Wrap" Text="{Binding MinuteInput}" VerticalAlignment="Top" Width="37"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="110,70,0,0" TextWrapping="Wrap" Text="{Binding SecondInput}" VerticalAlignment="Top" Width="37"/>
+        <Label Content=" HH   :   MM   :    SS" HorizontalAlignment="Left" Margin="26,39,0,0" VerticalAlignment="Top"/>
+
     </Grid>
 </Window>

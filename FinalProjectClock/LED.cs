@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using System.ComponentModel;
 using System.Windows.Shapes;
 
-namespace DigitalClock
+namespace FinalProjectClock
 {
     class LED : INotifyPropertyChanged
     {

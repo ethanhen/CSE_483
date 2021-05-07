@@ -12,14 +12,13 @@
             <Ellipse Height ="10" Width="10" Fill="Blue" Canvas.Left="98" Canvas.Top="75"></Ellipse>
             <Ellipse Height ="10" Width="10" Fill="Blue" Canvas.Left="198" Canvas.Top="100"></Ellipse>
             <Ellipse Height ="10" Width="10" Fill="Blue" Canvas.Left="198" Canvas.Top="75"></Ellipse>
-            <ItemsControl
-            x:Name="SevenSegmentLED">
+            <ItemsControl x:Name="SevenSegmentLED">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate x:Name="LEDTemplate">
                         <Canvas x:Name="DataTemplateCanvas">
                             <StackPanel VerticalAlignment="Bottom" Height="80" Width="40"
-                                Canvas.Top ="0"
-                                Canvas.Left="0"
+                                Canvas.Top ="{Binding LEDTop}"
+                                Canvas.Left="{Binding LEDLeft}"
                                 Background="Black">
                                 <Canvas>
                                     <Rectangle Name="TopHorizontal"
@@ -91,6 +90,8 @@
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
+            <Label Content="{Binding TimeFormatAMPM}" Canvas.Left="279" Canvas.Top="143" Foreground="#FFDAA516" Visibility="{Binding TimeFormatAMPMVisible}"/>
+            <Label Content="Alarm" Canvas.Left="122" Canvas.Top="0" Foreground="#FFDAA516" FontSize="20" Height="32" VerticalAlignment="Top" Visibility="{Binding AlarmVisible}"/>
         </Canvas>
     </Grid>
 </Window>
