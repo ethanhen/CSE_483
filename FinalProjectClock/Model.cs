@@ -8,9 +8,9 @@ using System.Net.Sockets;
 using System.Net;
 using System.Threading;
 using System.Collections.ObjectModel;
-using HighPrecisionTimer;
 using System.Timers;
-
+using System.Runtime.Serialization.Formatters.Binary;
+using System.IO;
 
 namespace FinalProjectClock
 {
@@ -29,6 +29,10 @@ namespace FinalProjectClock
         public TimeDataDLL.TimeData.StructTimeData alarmTime;
 
         System.Timers.Timer dotNetTimerTimer;
+
+        public delegate void AlarmEventHandler(object sender, System.Windows.Visibility v);
+        public event AlarmEventHandler alarmEvent;
+        public AlarmEventHandler handler;
 
         int showAlarm = 0;
 
@@ -117,7 +121,13 @@ namespace FinalProjectClock
                 try
                 {
                     Byte[] receiveData = _dataSocket.Receive(ref endPoint);
-                    inputTime = new TimeDataDLL.TimeData.StructTimeData(receiveData[0], receiveData[1], receiveData[2], (receiveData[3] != 0), (receiveData[4] != 0));
+
+                    BinaryFormatter format = new BinaryFormatter();
+                    MemoryStream memStream = new MemoryStream();
+                    memStream = new MemoryStream(receiveData);
+
+                    inputTime = (TimeDataDLL.TimeData.StructTimeData)format.Deserialize(memStream);
+                    //inputTime = new TimeDataDLL.TimeData.StructTimeData(receiveData[0], receiveData[1], receiveData[2], (receiveData[3] != 0), (receiveData[4] != 0));
                 }
                 catch (SocketException ex)
                 {
@@ -174,6 +184,7 @@ namespace FinalProjectClock
                     TimeFormatAMPM = "WHOOPS";
                     TimeFormatAMPMVisible = System.Windows.Visibility.Visible;
                 }
+
                 ledCollection[0].LEDValue = (UInt32)(x % 100) / 10;
                 ledCollection[1].LEDValue = (UInt32)(x % 10);
                 ledCollection[2].LEDValue = (UInt32)(timeInput.minute % 100) / 10;

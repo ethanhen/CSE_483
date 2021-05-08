@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 using System.ComponentModel;
 using System.Net.Sockets;
 using System.Net;
-
+using System.Runtime.Serialization.Formatters.Binary;
+using System.IO;
 
 namespace FinalProjectServer
 {
@@ -79,18 +80,31 @@ namespace FinalProjectServer
         {
             IPEndPoint remoteHost = new IPEndPoint(IPAddress.Parse(_remoteIPAddress), (int)_remotePort);
 
+            BinaryFormatter format = new BinaryFormatter();
+            MemoryStream memStream = new MemoryStream();
+
+
             switch (button)
             {
                 case "setTimeButton":
-                    sendBytes = new Byte[] { (Byte)int.Parse(_hourInput), (Byte)int.Parse(_minuteInput), (Byte)int.Parse(_secondInput), (Byte)Convert.ToInt32(false), (Byte)Convert.ToInt32(_timeFormat) };
+                    clockTime = new TimeDataDLL.TimeData.StructTimeData(int.Parse(_hourInput), int.Parse(_minuteInput), int.Parse(_secondInput), false, _timeFormat);
+                    format.Serialize(memStream, clockTime);
+                    sendBytes = memStream.ToArray();
+                    //sendBytes = new Byte[] { (Byte)int.Parse(_hourInput), (Byte)int.Parse(_minuteInput), (Byte)int.Parse(_secondInput), (Byte)Convert.ToInt32(false), (Byte)Convert.ToInt32(_timeFormat) };
                     break;
                 case "setNowButton":
                     DateTime timeNow = DateTime.Now;
-                    sendBytes = new Byte[] { (Byte)timeNow.Hour, (Byte)timeNow.Minute, (Byte)timeNow.Second, (Byte)Convert.ToInt32(false), (Byte)Convert.ToInt32(_timeFormat) };
+                    clockTime = new TimeDataDLL.TimeData.StructTimeData(timeNow.Hour, timeNow.Minute, timeNow.Second, false, _timeFormat);
+                    format.Serialize(memStream, clockTime);
+                    sendBytes = memStream.ToArray();
+                    //sendBytes = new Byte[] { (Byte)timeNow.Hour, (Byte)timeNow.Minute, (Byte)timeNow.Second, (Byte)Convert.ToInt32(false), (Byte)Convert.ToInt32(_timeFormat) };
                     break;
                 case "setAlarmButton":
                     clockTime = new TimeDataDLL.TimeData.StructTimeData(int.Parse(_hourInput), int.Parse(_minuteInput), int.Parse(_secondInput), true, _timeFormat);
-                    sendBytes = new Byte[] { (Byte)int.Parse(_hourInput), (Byte)int.Parse(_minuteInput), (Byte)int.Parse(_secondInput), (Byte)Convert.ToInt32(true), (Byte)Convert.ToInt32(_timeFormat) };
+                    format.Serialize(memStream, clockTime);
+                    sendBytes = memStream.ToArray();
+                    //clockTime = new TimeDataDLL.TimeData.StructTimeData(int.Parse(_hourInput), int.Parse(_minuteInput), int.Parse(_secondInput), true, _timeFormat);
+                    //sendBytes = new Byte[] { (Byte)int.Parse(_hourInput), (Byte)int.Parse(_minuteInput), (Byte)int.Parse(_secondInput), (Byte)Convert.ToInt32(true), (Byte)Convert.ToInt32(_timeFormat) };
                     break;
                 default:
                     sendBytes = new Byte[] { };
