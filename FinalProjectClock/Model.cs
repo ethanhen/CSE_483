@@ -1,4 +1,5 @@
-﻿using System;
+﻿//ethan hensley and robert kashian
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -34,7 +35,8 @@ namespace FinalProjectClock
         public event AlarmEventHandler alarmEvent;
         public AlarmEventHandler handler;
 
-        int showAlarm = 0;
+        int alarmCounter = 0;
+        bool showAlarm = false;
 
         private string _timeFormatAMPM;
         public string TimeFormatAMPM
@@ -233,13 +235,18 @@ namespace FinalProjectClock
             {
                 updateTime();
                 setTime(clockTime);
-                if(compareTime(alarmTime, clockTime))
+
+                showAlarm = compareTime(alarmTime, clockTime);
+                if (showAlarm)
+                    alarmCounter = 5;
+                if(alarmCounter > 0)
                 {
                     AlarmVisible = System.Windows.Visibility.Visible;
-                    showAlarm = 5;
+                    alarmCounter--;
                 }
                 else
                     AlarmVisible = System.Windows.Visibility.Hidden;
+                    
 
             }
             catch (System.Exception ex)
